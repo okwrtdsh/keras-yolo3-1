@@ -2,3 +2,8 @@
 *.jpeg
 *.weights
 *.h5
+*.pkl
+*.ipynb
+log_*/
+output*/
+

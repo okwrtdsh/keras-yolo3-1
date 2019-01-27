@@ -1,0 +1,69 @@
+{
+    "model" : {
+        "min_input_size":       224,
+        "max_input_size":       480,
+        "anchors":              [
+          44,57, 50,154, 87,87, 107,175, 144,111, 182,181, 189,30, 327,65, 342,153
+        ],
+        "labels":               ["1", "2", "3", "4", "5", "6", "7", "8"]
+    },
+
+    "train": {
+        "train_image_folders":   [
+          "./fujifilm/input/train/location2/images/",
+          "./fujifilm/input/train/location3/images/",
+          "./fujifilm/input/train/location4/images/",
+          "./fujifilm/input/train/location5/images/",
+          "./fujifilm/input/train/location6/images/",
+          "./fujifilm/input/train/location7/images/"
+        ],
+        "train_annot_folders":   [
+          "./fujifilm/input/train/location2/labels/",
+          "./fujifilm/input/train/location3/labels/",
+          "./fujifilm/input/train/location4/labels/",
+          "./fujifilm/input/train/location5/labels/",
+          "./fujifilm/input/train/location6/labels/",
+          "./fujifilm/input/train/location7/labels/"
+        ],
+        "cache_names":          [
+          "fujifilm_location2.pkl",
+          "fujifilm_location3.pkl",
+          "fujifilm_location4.pkl",
+          "fujifilm_location5.pkl",
+          "fujifilm_location6.pkl",
+          "fujifilm_location7.pkl"
+        ],
+
+        "train_times":          1,
+        "batch_size":           4,
+        "learning_rate":        1e-5,
+        "nb_epochs":            100,
+        "warmup_epochs":        10,
+        "ignore_thresh":        0.5,
+        "gpus":                 "0",
+
+        "grid_scales":          [1,1,1],
+        "obj_scale":            5,
+        "noobj_scale":          1,
+        "xywh_scale":           1,
+        "class_scale":          1,
+
+        "tensorboard_dir":      "log_fujifilm",
+        "saved_weights_name":   "fujifilm.h5",
+        "debug":                false
+    },
+
+    "valid": {
+        "valid_image_folders":   [
+          "./fujifilm/input/train/location1/images/"
+        ],
+        "valid_annot_folders":   [
+          "./fujifilm/input/train/location1/labels/"
+        ],
+        "cache_names":          [
+          "fujifilm_location1.pkl"
+        ],
+
+        "valid_times":          1
+    }
+}
