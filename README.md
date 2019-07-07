@@ -25,7 +25,6 @@ services:
       - 8888:8888
     volumes:
       - .:/src/notebooks
-      - //datasets:/src/notebooks/datasets
       - /etc/localtime:/etc/localtime:ro
     # - .jupyter:/root/.jupyter
 ```
