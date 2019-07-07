@@ -91,7 +91,7 @@ $ python predict_fujifilm2nd.py \
     -i ../input/test_images/ \
     -o ../input/test_annotations_output_gamma_multi/ \
     --ano_only
-# 回答
+# 解答
 $ python predict_from_box.py \
     -i ../input/test_images/ \
     -a ../input/test_annotations_output_gamma_multi/ \
