@@ -96,7 +96,7 @@ def _main_(argv):
     train_labels = {k: 0 for k in labels}
     for train_annot_folder, train_image_folder, train_cache in zip(
             config['train']['train_annot_folders'], config['train']['train_image_folders'], config['train']['cache_names']):
-        ints, lbls = parse_voc_annotation(train_annot_folder, train_image_folder, train_cache, labels)
+        ints, lbls = parse_voc_annotation(train_annot_folder, train_image_folder, train_cache, labels, 1)
         train_imgs.extend(ints)
         for k in labels:
             train_labels[k] += lbls.get(k, 0)
@@ -115,7 +115,7 @@ def _main_(argv):
     centroids = run_kmeans(annotation_dims, num_anchors)
 
     # write anchors to file
-    print('\naverage IOU for', num_anchors, 'anchors:', '%0.2f' % avg_IOU(annotation_dims, centroids))
+    print('\naverage IOU for', num_anchors, 'anchors:', '%0.4f' % avg_IOU(annotation_dims, centroids))
     print_anchors(centroids)
 
 if __name__ == '__main__':

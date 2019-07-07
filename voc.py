@@ -3,7 +3,7 @@ import os
 import xml.etree.ElementTree as ET
 import pickle
 
-def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[]):
+def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[], margin=0):
     if os.path.exists(cache_name):
         with open(cache_name, 'rb') as handle:
             cache = pickle.load(handle)
@@ -33,6 +33,9 @@ def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[]):
                     obj = {}
                     
                     for attr in list(elem):
+                        if 'score' in attr.tag:
+                            obj['score'] = float(attr.text)
+
                         if 'name' in attr.tag:
                             obj['name'] = attr.text
 
@@ -49,13 +52,13 @@ def parse_voc_annotation(ann_dir, img_dir, cache_name, labels=[]):
                         if 'bndbox' in attr.tag:
                             for dim in list(attr):
                                 if 'xmin' in dim.tag:
-                                    obj['xmin'] = int(round(float(dim.text)))
+                                    obj['xmin'] = int(round(float(dim.text))) - margin
                                 if 'ymin' in dim.tag:
-                                    obj['ymin'] = int(round(float(dim.text)))
+                                    obj['ymin'] = int(round(float(dim.text))) - margin
                                 if 'xmax' in dim.tag:
-                                    obj['xmax'] = int(round(float(dim.text)))
+                                    obj['xmax'] = int(round(float(dim.text))) + margin
                                 if 'ymax' in dim.tag:
-                                    obj['ymax'] = int(round(float(dim.text)))
+                                    obj['ymax'] = int(round(float(dim.text))) + margin
 
             if len(img['object']) > 0:
                 all_insts += [img]
